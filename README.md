@@ -90,7 +90,8 @@ Integration tests focus on black-box testing of physical resources created by Pu
 The physical resources will be validated for the following:
 - Ensure a HTTP 200 status code is received from our Wordpress site.
 - Ensure the ECS service has equal amount of desired and running tasks.
-- Ensured 
+- Ensure our the ALB is configured to send traffic to the appropriate port.
+- Ensure our ECS tasks are assigned public IP Address.
 
 To trigger our integration test run:
 1. Change to our integration tests directory
