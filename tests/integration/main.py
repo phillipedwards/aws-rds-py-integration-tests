@@ -37,17 +37,19 @@ bootstrap_environment(work_dir)
 
 stack = auto.create_or_select_stack(stack_name, work_dir=work_dir)
 
-print("setting stack configuration...")
+print(f"setting {stack_name} stack configuration...")
 
 stack.set_config("aws:region", auto.ConfigValue(value=aws_region))
-stack.set_config("aws:profile", auto.ConfigValue(value=aws_profile))
-
 print(f"using AWS region {aws_region}")
+
+if aws_profile != "":
+    stack.set_config("aws:profile", auto.ConfigValue(value=aws_profile))
+    print(f"using AWS profile {aws_profile}")
 
 print("refreshing the stack...")
 stack.refresh(on_output=print)
 
-print("updating stack...")
+print("updating the stack...")
 up_result = stack.up(on_output=print)
 
 # ================ Integration Tests =============
@@ -98,6 +100,6 @@ print("\n#####################################################################\n
 # only delete resources if all tests succeed
 if len(test_failures) == 0:
     # ======= Destroy the stack and resources ==============
-    print("automatically destroying stack due to all tests passing...")
+    print("automatically destroying the stack due to all tests passing...")
     stack.destroy(on_output=print)
     stack.workspace.remove_stack(stack_name)

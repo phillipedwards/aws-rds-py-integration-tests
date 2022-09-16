@@ -114,7 +114,7 @@ To trigger our integration test run:
 - If all tests pass, all physical resources will be destroyed.
 - If one or more tests failed, the stack and resources will not be destroyed automatically.
 
-1. To force an integration test failure, uncomment the 
+1. To force an integration test failure, uncomment the last test case in `./tests/integration/integration_tests.py`
 
 
 ### Unit Tests
