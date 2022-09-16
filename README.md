@@ -115,8 +115,10 @@ To trigger our integration test run:
 - If all tests pass, all physical resources will be destroyed.
 - If one or more tests failed, the stack and resources will not be destroyed automatically. 
 
-1. To force an integration test failure, uncomment the last test case in `./tests/integration/integration_tests.py`
+To force an integration test failure, uncomment the last test case in `./tests/integration/integration_tests.py`
 
+Clean up:
+if the integration tests all succeed the stack and all resources will automatically be destroyed. If not, all resources can be destroyed by executing a `pulumi destroy` from the main directory of this project.
 
 ### Unit Tests
 
