@@ -1,11 +1,12 @@
 # WordPress Site in AWS Fargate with RDS DB Backend
 
-This example serves a WordPress site in AWS ECS Fargate using an RDS MySQL Backend.
+This example serves a WordPress site in AWS ECS Fargate using an RDS MySQL Backend. Included is an integration test example using Pulumi's Automation API.
 
 It leverages the following Pulumi concepts/constructs:
 
 - [Component Resources](https://www.pulumi.com/docs/intro/concepts/programming-model/#components): Allows one to create custom resources that encapsulate one's best practices. In this example, component resource is used to define a "VPC" custom resource, a "Backend" custom resource that sets up the RDS DB, and a "Frontend" resource that sets up the ECS cluster and load balancer and tasks.
 - [Other Providers](https://www.pulumi.com/docs/reference/pkg/): Beyond the providers for the various clouds and Kubernetes, etc, Pulumi allows one to create and manage non-cloud resources. In this case, the program uses the Random provider to create a random password if necessary.
+- [Automation API](https://www.pulumi.com/docs/guides/automation-api/): Allows programmatic interaction with Pulumi programs without running the Pulumi CLI. In this case, we can run `pulumi up` on a stack, validate physical resources pass user defined tests, and destroy the resources using `pulumi destroy` once we are complete.
 
 This sample uses the following AWS products (and related Pulumi providers):
 
@@ -79,6 +80,46 @@ Note: some values in this example will be different from run to run.
 - `Web Service URL`: This is a link to the load balancer fronting the WordPress container. Note: It may take a few minutes for AWS to complete deploying the service and so you may see a 503 error initially.
 
 1. To clean up resources, run `pulumi destroy` and answer the confirmation question at the prompt.
+
+## Testing the Program
+
+### Integration Tests
+
+Integration tests focus on black-box testing of physical resources created by Pulumi programs. These tests verify and validate properties of the created physical resources match the expected outcome. These physical resources are deleted are then deleted assuming all user defined test cases pass.
+
+The physical resources will be validated for the following:
+- Ensure a HTTP 200 status code is received from our Wordpress site.
+- Ensure the ECS service has equal amount of desired and running tasks.
+- Ensured 
+
+To trigger our integration test run:
+1. Change to our integration tests directory
+   ```bash
+   cd tests/integration
+   ```
+
+1. Create our python virutal environment and install dependencies
+   ```bash
+   virutalenv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+1. Execute our integration tests
+   ```bash
+   venv/bin/python3 main.py {stack_name} {aws_region} {aws_profile}
+   ```
+
+1. The results of the integration tests will be printed to the console. 
+- If all tests pass, all physical resources will be destroyed.
+- If one or more tests failed, the stack and resources will not be destroyed automatically.
+
+1. To force an integration test failure, uncomment the 
+
+
+### Unit Tests
+
+WIP
 
 ## Troubleshooting
 
