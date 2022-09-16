@@ -91,7 +91,7 @@ The physical resources will be validated for the following:
 - Ensure a HTTP 200 status code is received from our Wordpress site.
 - Ensure the ECS service has equal amount of desired and running tasks.
 - Ensure our the ALB is configured to send traffic to the appropriate port.
-- Ensure our ECS tasks are assigned public IP Address.
+- Ensure our ECS tasks are assigned public IP Addresses.
 
 To trigger our integration test run:
 1. Change to our integration tests directory
@@ -113,7 +113,7 @@ To trigger our integration test run:
 
 1. The results of the integration tests will be printed to the console. 
 - If all tests pass, all physical resources will be destroyed.
-- If one or more tests failed, the stack and resources will not be destroyed automatically.
+- If one or more tests failed, the stack and resources will not be destroyed automatically. 
 
 1. To force an integration test failure, uncomment the last test case in `./tests/integration/integration_tests.py`
 
