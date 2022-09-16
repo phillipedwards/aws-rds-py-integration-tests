@@ -87,6 +87,8 @@ Note: some values in this example will be different from run to run.
 
 Integration tests focus on black-box testing of physical resources created by Pulumi programs. These tests verify and validate properties of the created physical resources match the expected outcome. These physical resources are deleted are then deleted assuming all user defined test cases pass.
 
+Navigate to `tests/integration` to view how Automation API has been used to create user-defined integration tests.
+
 The physical resources will be validated for the following:
 - Ensure a HTTP 200 status code is received from our Wordpress site.
 - Ensure the ECS service has equal amount of desired and running tasks.
